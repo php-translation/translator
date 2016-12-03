@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the PHP Translation package.
+ *
+ * (c) PHP Translation team <tobias.nyholm@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ */
+
 namespace Translation\Translator\Service;
 
 use Http\Client\HttpClient;
@@ -7,8 +17,6 @@ use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
 use Http\Message\MessageFactory;
 use Http\Message\RequestFactory;
-use Psr\Log\LoggerAwareInterface;
-use Psr\Log\LoggerInterface;
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
@@ -25,11 +33,8 @@ abstract class HttpTranslator
      */
     private $requestFactory;
 
-
-
     /**
-     *
-     * @param HttpClient $httpClient
+     * @param HttpClient     $httpClient
      * @param MessageFactory $requestFactory
      */
     public function __construct(HttpClient $httpClient = null, RequestFactory $requestFactory = null)
@@ -45,7 +50,6 @@ abstract class HttpTranslator
     {
         return $this->httpClient;
     }
-
 
     /**
      * @return RequestFactory
