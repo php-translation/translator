@@ -29,7 +29,9 @@ class GoogleTranslator extends HttpTranslator implements TranslatorService
     private $key;
 
     /**
-     * @param string $key
+     * @param string              $key            Google API key
+     * @param HttpClient|null     $httpClient
+     * @param RequestFactory|null $requestFactory
      */
     public function __construct($key, HttpClient $httpClient = null, RequestFactory $requestFactory = null)
     {
@@ -89,7 +91,7 @@ class GoogleTranslator extends HttpTranslator implements TranslatorService
 
     /**
      * @param string $original
-     * @param string $translaton
+     * @param string $translationHtmlEncoded
      *
      * @return string
      */
