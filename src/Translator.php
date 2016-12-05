@@ -41,8 +41,6 @@ final class Translator implements LoggerAwareInterface, TranslatorService
      * @param string $to
      *
      * @return null|string Null is return when all translators failed.
-     *
-     * @throws NoTranslatorServicesException if we failed to add translation services before calling this function.
      */
     public function translate($string, $from, $to)
     {
