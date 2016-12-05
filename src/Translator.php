@@ -14,7 +14,6 @@ namespace Translation\Translator;
 
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
-use Translation\Translator\Exception\NoTranslatorServicesException;
 use Translation\Translator\Exception as TranslatorException;
 
 /**
