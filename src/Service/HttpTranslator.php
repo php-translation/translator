@@ -15,7 +15,6 @@ namespace Translation\Translator\Service;
 use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
-use Http\Message\MessageFactory;
 use Http\Message\RequestFactory;
 
 /**
@@ -35,7 +34,7 @@ abstract class HttpTranslator
 
     /**
      * @param HttpClient     $httpClient
-     * @param MessageFactory $requestFactory
+     * @param RequestFactory $requestFactory
      */
     public function __construct(HttpClient $httpClient = null, RequestFactory $requestFactory = null)
     {
