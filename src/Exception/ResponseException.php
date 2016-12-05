@@ -12,6 +12,11 @@
 
 namespace Translation\Translator\Exception;
 
+/**
+ * Whenever the translator gives a non successful response.
+ *
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
+ */
 class ResponseException extends \RuntimeException
 {
     public static function createNonSuccessfulResponse($url)
