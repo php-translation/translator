@@ -12,10 +12,13 @@
 
 namespace Translation\Translator\Exception;
 
-class NoTranslatorServicesException extends \RuntimeException
+/**
+ * @author Tobias Nyholm <tobias.nyholm@gmail.com>
+ */
+class NoTranslationFoundException extends \RuntimeException
 {
     public static function create()
     {
-        return new self('No translation services have been added.');
+        return new self('No translation found.');
     }
 }

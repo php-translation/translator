@@ -28,7 +28,7 @@ final class Translator implements LoggerAwareInterface, TranslatorService
     /**
      * @var TranslatorService[]
      */
-    private $translatorServices;
+    private $translatorServices = [];
 
     /**
      * @var LoggerInterface
@@ -46,13 +46,11 @@ final class Translator implements LoggerAwareInterface, TranslatorService
      */
     public function translate($string, $from, $to)
     {
-        if (empty($this->translatorServices)) {
-            throw NoTranslatorServicesException::create();
-        }
-
         foreach ($this->translatorServices as $service) {
             try {
                 return $service->translate($string, $from, $to);
+            } catch (TranslatorException\NoTranslationFoundException $e) {
+                // Do nothing, try again.
             } catch (TranslatorException $e) {
                 $this->log('error', $e->getMessage());
             } catch (\Exception $e) {
