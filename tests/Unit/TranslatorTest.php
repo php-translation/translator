@@ -10,15 +10,16 @@
  *
  */
 
-namespace Translation\translator\tests\Unit;
+namespace Translation\translator\Tests\Unit;
 
 use Nyholm\NSA;
+use PHPUnit\Framework\TestCase;
 use Translation\Translator\Translator;
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class TranslatorTest extends \PHPUnit_Framework_TestCase
+class TranslatorTest extends TestCase
 {
     public function testAddTranslatorService()
     {
