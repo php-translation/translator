@@ -20,12 +20,18 @@
         </testsuite>
     </testsuites>
 
+    <php>
+        <!-- API Keys -->
+        <env name="YANDEX_KEY" value=""/>
+        <env name="GOOGLE_KEY" value=""/>
+    </php>
+
     <filter>
         <whitelist>
             <directory suffix=".php">./</directory>
             <exclude>
                 <directory>vendor</directory>
-                <directory>Tests</directory>
+                <directory>tests</directory>
             </exclude>
         </whitelist>
     </filter>
