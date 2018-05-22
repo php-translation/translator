@@ -14,7 +14,6 @@ namespace Translation\translator\tests\Integration;
 
 use PHPUnit\Framework\TestCase;
 use Translation\Translator\Service\GoogleTranslator;
-use Translation\Translator\Service\YandexTranslator;
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>

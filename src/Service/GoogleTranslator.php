@@ -54,7 +54,7 @@ class GoogleTranslator extends HttpTranslator implements TranslatorService
         /** @var ResponseInterface $response */
         $response = $this->getHttpClient()->sendRequest($request);
 
-        if ($response->getStatusCode() !== 200) {
+        if (200 !== $response->getStatusCode()) {
             throw ResponseException::createNonSuccessfulResponse($this->getUrl($string, $from, $to, '[key]'));
         }
 

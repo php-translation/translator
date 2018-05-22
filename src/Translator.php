@@ -79,7 +79,7 @@ final class Translator implements LoggerAwareInterface, TranslatorService
      */
     private function log($level, $message, array $context = [])
     {
-        if ($this->logger !== null) {
+        if (null !== $this->logger) {
             $this->logger->log($level, $message, $context);
         }
     }
