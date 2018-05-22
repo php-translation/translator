@@ -97,7 +97,7 @@ class GoogleTranslator extends HttpTranslator implements TranslatorService
      */
     private function format($original, $translationHtmlEncoded)
     {
-        $translation = htmlspecialchars_decode($translationHtmlEncoded);
+        $translation = html_entity_decode($translationHtmlEncoded, ENT_QUOTES | ENT_HTML401, 'UTF-8');
 
         // if capitalized, make sure we also capitalize.
         $firstChar = mb_substr($original, 0, 1);
