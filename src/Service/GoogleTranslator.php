@@ -54,7 +54,7 @@ class GoogleTranslator extends HttpTranslator implements TranslatorService
         /** @var ResponseInterface $response */
         $response = $this->getHttpClient()->sendRequest($request);
 
-        if ($response->getStatusCode() !== 200) {
+        if (200 !== $response->getStatusCode()) {
             throw ResponseException::createNonSuccessfulResponse($this->getUrl($string, $from, $to, '[key]'));
         }
 
@@ -97,7 +97,7 @@ class GoogleTranslator extends HttpTranslator implements TranslatorService
      */
     private function format($original, $translationHtmlEncoded)
     {
-        $translation = htmlspecialchars_decode($translationHtmlEncoded);
+        $translation = html_entity_decode($translationHtmlEncoded, ENT_QUOTES | ENT_HTML401, 'UTF-8');
 
         // if capitalized, make sure we also capitalize.
         $firstChar = mb_substr($original, 0, 1);
