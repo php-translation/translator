@@ -16,12 +16,11 @@ use Http\Client\HttpClient;
 use Http\Message\RequestFactory;
 use Psr\Http\Message\ResponseInterface;
 use Translation\Translator\Exception\ResponseException;
-use Translation\Translator\TranslatorService;
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class YandexTranslator extends HttpTranslator implements TranslatorService
+class YandexTranslator extends HttpTranslator
 {
     /**
      * @var string
@@ -87,25 +86,5 @@ class YandexTranslator extends HttpTranslator implements TranslatorService
             $to,
             urlencode($string)
         );
-    }
-
-    /**
-     * @param string $original
-     * @param string $translationHtmlEncoded
-     *
-     * @return string
-     */
-    private function format($original, $translationHtmlEncoded)
-    {
-        $translation = htmlspecialchars_decode($translationHtmlEncoded);
-
-        // if capitalized, make sure we also capitalize.
-        $firstChar = mb_substr($original, 0, 1);
-        if (mb_strtoupper($firstChar) === $firstChar) {
-            $first = mb_strtoupper(mb_substr($translation, 0, 1));
-            $translation = $first.mb_substr($translation, 1);
-        }
-
-        return $translation;
     }
 }

@@ -12,18 +12,18 @@
 
 namespace Translation\translator\tests\Integration;
 
-use Translation\Translator\Service\GoogleTranslator;
+use Translation\Translator\Service\BingTranslator;
 
 /**
- * @author Tobias Nyholm <tobias.nyholm@gmail.com>
+ * @author Baptiste Leduc <baptiste.leduc@gmail.com>
  */
-class GoogleTranslatorTest extends AbstractTranslatorTest
+class BingTranslatorTest extends AbstractTranslatorTest
 {
     public function setUp()
     {
-        $key = getenv('GOOGLE_KEY');
+        $key = getenv('BING_KEY');
         if (!empty($key)) {
-            $this->translator = new GoogleTranslator($key);
+            $this->translator = new BingTranslator($key);
         }
     }
 }

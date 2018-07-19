@@ -27,4 +27,15 @@ interface TranslatorService
      * @throws \Translation\Translator\Exception if we could not translate string
      */
     public function translate($string, $from, $to);
+
+    /**
+     * @param array  $strings array of strings to translate
+     * @param string $from    from what locale
+     * @param string $to      to what locale
+     *
+     * @return array Return the translated strings
+     *
+     * @throws \Translation\Translator\Exception if we could not translate string
+     */
+    public function translateArray($strings, $from, $to);
 }

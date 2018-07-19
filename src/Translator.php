@@ -43,9 +43,23 @@ final class Translator implements LoggerAwareInterface, TranslatorService
      */
     public function translate($string, $from, $to)
     {
+        list($result) = $this->translateArray([$string], $from, $to);
+
+        return $result;
+    }
+
+    /**
+     * @param array  $strings
+     * @param string $from
+     * @param string $to
+     *
+     * @return null|array Null is return when all translators failed.
+     */
+    public function translateArray($strings, $from, $to)
+    {
         foreach ($this->translatorServices as $service) {
             try {
-                return $service->translate($string, $from, $to);
+                return $service->translateArray($strings, $from, $to);
             } catch (TranslatorException\NoTranslationFoundException $e) {
                 // Do nothing, try again.
             } catch (TranslatorException $e) {

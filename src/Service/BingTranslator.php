@@ -18,9 +18,9 @@ use Psr\Http\Message\ResponseInterface;
 use Translation\Translator\Exception\ResponseException;
 
 /**
- * @author Tobias Nyholm <tobias.nyholm@gmail.com>
+ * @author Baptiste Leduc <baptiste.leduc@gmail.com>
  */
-class GoogleTranslator extends HttpTranslator
+class BingTranslator extends HttpTranslator
 {
     /**
      * @var string
@@ -36,7 +36,7 @@ class GoogleTranslator extends HttpTranslator
     {
         parent::__construct($httpClient, $requestFactory);
         if (empty($key)) {
-            throw new \InvalidArgumentException('Google "key" can not be empty');
+            throw new \InvalidArgumentException('Bing "key" can not be empty');
         }
 
         $this->key = $key;
@@ -47,8 +47,15 @@ class GoogleTranslator extends HttpTranslator
      */
     public function translate($string, $from, $to)
     {
-        $url = $this->getUrl($string, $from, $to, $this->key);
-        $request = $this->getRequestFactory()->createRequest('GET', $url);
+        $body = json_encode([['Text' => $string]]);
+        $url = $this->getUrl($from, $to);
+        $request = $this->getRequestFactory()->createRequest('POST', $url, [], $body);
+
+        $request = $request
+            ->withHeader('Ocp-Apim-Subscription-Key', $this->key)
+            ->withHeader('Content-Type', 'application/json')
+            ->withHeader('X-ClientTraceId', $this->createGuid())
+            ->withHeader('Content-length', strlen($body));
 
         /** @var ResponseInterface $response */
         $response = $this->getHttpClient()->sendRequest($request);
@@ -61,30 +68,40 @@ class GoogleTranslator extends HttpTranslator
         $data = json_decode($responseBody, true);
 
         if (!is_array($data)) {
-            throw ResponseException::createUnexpectedResponse($this->getUrl($string, $from, $to, '[key]'), $responseBody);
+            throw ResponseException::createUnexpectedResponse($url, $responseBody);
         }
 
-        foreach ($data['data']['translations'] as $translaton) {
-            return $this->format($string, $translaton['translatedText']);
+        foreach ($data as $details) {
+            return $this->format($string, $details['translations'][0]['text']);
         }
     }
 
     /**
-     * @param string $string
      * @param string $from
      * @param string $to
-     * @param string $key
      *
      * @return string
      */
-    private function getUrl($string, $from, $to, $key)
+    private function getUrl($from, $to)
     {
         return sprintf(
-            'https://www.googleapis.com/language/translate/v2?key=%s&source=%s&target=%s&q=%s',
-            $key,
-            $from,
+            'https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=%s&from=%s&textType=html',
             $to,
-            urlencode($string)
+            $from
+        );
+    }
+
+    /**
+     * @return string
+     */
+    private function createGuid()
+    {
+        return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+            mt_rand(0, 0xffff),
+            mt_rand(0, 0x0fff) | 0x4000,
+            mt_rand(0, 0x3fff) | 0x8000,
+            mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
         );
     }
 }

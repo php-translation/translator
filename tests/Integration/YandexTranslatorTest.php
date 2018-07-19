@@ -12,23 +12,28 @@
 
 namespace Translation\translator\tests\Integration;
 
-use PHPUnit\Framework\TestCase;
 use Translation\Translator\Service\YandexTranslator;
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class YandexTranslatorTest extends TestCase
+class YandexTranslatorTest extends AbstractTranslatorTest
 {
-    public function testTranslate()
+    /**
+     * @var array
+     */
+    protected $expected = ['яблоко', 'вишня'];
+
+    /**
+     * @var string
+     */
+    protected $to = 'ru';
+
+    public function setUp()
     {
         $key = getenv('YANDEX_KEY');
-        if (empty($key)) {
-            $this->markTestSkipped('No Yandex key in environment');
+        if (!empty($key)) {
+            $this->translator = new YandexTranslator($key);
         }
-
-        $translator = new YandexTranslator($key);
-        $result = $translator->translate('apple', 'en', 'ru');
-        $this->assertEquals('яблоко', $result);
     }
 }
