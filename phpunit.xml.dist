@@ -24,6 +24,7 @@
         <!-- API Keys -->
         <env name="YANDEX_KEY" value=""/>
         <env name="GOOGLE_KEY" value=""/>
+        <env name="BING_KEY" value=""/>
     </php>
 
     <filter>
