@@ -23,8 +23,6 @@ matrix:
   include:
     - php: 5.5
       env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" COVERAGE=true TEST_COMMAND="composer test-ci"
-    - php: hhvm
-      dist: trusty
 
 install:
     - travis_retry composer update --prefer-dist --no-interaction
