@@ -9,10 +9,9 @@ branches:
     - /^analysis-.*$/
 
 php:
-    - 5.6
-    - 7.0
     - 7.1
     - 7.2
+    - 7.3
 env:
   global:
     - TEST_COMMAND="composer test"
@@ -20,7 +19,7 @@ env:
 matrix:
   fast_finish: true
   include:
-    - php: 5.6
+    - php: 7.3
       env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" COVERAGE=true TEST_COMMAND="composer test-ci"
 
 install:
