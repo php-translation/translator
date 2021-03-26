@@ -39,7 +39,7 @@ final class Translator implements LoggerAwareInterface, TranslatorService
      * @param string $from
      * @param string $to
      *
-     * @return null|string Null is return when all translators failed.
+     * @return string|null null is return when all translators failed
      */
     public function translate($string, $from, $to)
     {
@@ -59,8 +59,6 @@ final class Translator implements LoggerAwareInterface, TranslatorService
     }
 
     /**
-     * @param TranslatorService $thirdPartyService
-     *
      * @return Translator
      */
     public function addTranslatorService(TranslatorService $thirdPartyService)
@@ -75,7 +73,6 @@ final class Translator implements LoggerAwareInterface, TranslatorService
      *
      * @param string $level
      * @param string $message
-     * @param array  $context
      */
     private function log($level, $message, array $context = [])
     {
@@ -84,9 +81,6 @@ final class Translator implements LoggerAwareInterface, TranslatorService
         }
     }
 
-    /**
-     * @param LoggerInterface $logger
-     */
     public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;

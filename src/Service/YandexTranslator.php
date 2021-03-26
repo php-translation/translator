@@ -29,9 +29,7 @@ class YandexTranslator extends HttpTranslator implements TranslatorService
     private $key;
 
     /**
-     * @param string              $key            Google API key
-     * @param HttpClient|null     $httpClient
-     * @param RequestFactory|null $requestFactory
+     * @param string $key Google API key
      */
     public function __construct($key, HttpClient $httpClient = null, RequestFactory $requestFactory = null)
     {
@@ -61,7 +59,7 @@ class YandexTranslator extends HttpTranslator implements TranslatorService
         $responseBody = $response->getBody()->__toString();
         $data = json_decode($responseBody, true);
 
-        if (!is_array($data)) {
+        if (!\is_array($data)) {
             throw ResponseException::createUnexpectedResponse($this->getUrl($string, $from, $to, '[key]'), $responseBody);
         }
 

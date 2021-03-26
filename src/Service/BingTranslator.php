@@ -29,9 +29,7 @@ class BingTranslator extends HttpTranslator implements TranslatorService
     private $key;
 
     /**
-     * @param string              $key            Google API key
-     * @param HttpClient|null     $httpClient
-     * @param RequestFactory|null $requestFactory
+     * @param string $key Google API key
      */
     public function __construct($key, HttpClient $httpClient = null, RequestFactory $requestFactory = null)
     {
@@ -56,7 +54,7 @@ class BingTranslator extends HttpTranslator implements TranslatorService
             ->withHeader('Ocp-Apim-Subscription-Key', $this->key)
             ->withHeader('Content-Type', 'application/json')
             ->withHeader('X-ClientTraceId', $this->createGuid())
-            ->withHeader('Content-length', strlen($body));
+            ->withHeader('Content-length', \strlen($body));
 
         /** @var ResponseInterface $response */
         $response = $this->getHttpClient()->sendRequest($request);
@@ -68,7 +66,7 @@ class BingTranslator extends HttpTranslator implements TranslatorService
         $responseBody = $response->getBody()->__toString();
         $data = json_decode($responseBody, true);
 
-        if (!is_array($data)) {
+        if (!\is_array($data)) {
             throw ResponseException::createUnexpectedResponse($url, $responseBody);
         }
 
