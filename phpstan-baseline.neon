@@ -1,0 +1,32 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Method Translation\\\\Translator\\\\Service\\\\BingTranslator\\:\\:getUrl\\(\\) invoked with 4 parameters, 2 required\\.$#"
+			count: 1
+			path: src/Service/BingTranslator.php
+
+		-
+			message: "#^Method Translation\\\\Translator\\\\Service\\\\BingTranslator\\:\\:translate\\(\\) should return string but return statement is missing\\.$#"
+			count: 1
+			path: src/Service/BingTranslator.php
+
+		-
+			message: "#^Method Translation\\\\Translator\\\\Service\\\\GoogleTranslator\\:\\:translate\\(\\) should return string but return statement is missing\\.$#"
+			count: 1
+			path: src/Service/GoogleTranslator.php
+
+		-
+			message: "#^Method Translation\\\\Translator\\\\Service\\\\YandexTranslator\\:\\:translate\\(\\) should return string but return statement is missing\\.$#"
+			count: 1
+			path: src/Service/YandexTranslator.php
+
+		-
+			message: "#^Method Translation\\\\Translator\\\\Translator\\:\\:translate\\(\\) should return string\\|null but empty return statement found\\.$#"
+			count: 1
+			path: src/Translator.php
+
+		-
+			message: "#^PHPDoc tag @throws with type Translation\\\\Translator\\\\Exception is not subtype of Throwable$#"
+			count: 1
+			path: src/TranslatorService.php
+
