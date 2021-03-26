@@ -29,9 +29,7 @@ class GoogleTranslator extends HttpTranslator implements TranslatorService
     private $key;
 
     /**
-     * @param string              $key            Google API key
-     * @param HttpClient|null     $httpClient
-     * @param RequestFactory|null $requestFactory
+     * @param string $key Google API key
      */
     public function __construct($key, HttpClient $httpClient = null, RequestFactory $requestFactory = null)
     {
@@ -61,7 +59,7 @@ class GoogleTranslator extends HttpTranslator implements TranslatorService
         $responseBody = $response->getBody()->__toString();
         $data = json_decode($responseBody, true);
 
-        if (!is_array($data)) {
+        if (!\is_array($data)) {
             throw ResponseException::createUnexpectedResponse($this->getUrl($string, $from, $to, '[key]'), $responseBody);
         }
 
@@ -97,7 +95,7 @@ class GoogleTranslator extends HttpTranslator implements TranslatorService
      */
     private function format($original, $translationHtmlEncoded)
     {
-        $translation = html_entity_decode($translationHtmlEncoded, ENT_QUOTES | ENT_HTML401, 'UTF-8');
+        $translation = html_entity_decode($translationHtmlEncoded, \ENT_QUOTES | \ENT_HTML401, 'UTF-8');
 
         // if capitalized, make sure we also capitalize.
         $firstChar = mb_substr($original, 0, 1);

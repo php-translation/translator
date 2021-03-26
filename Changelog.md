@@ -1,10 +1,20 @@
 # Change Log
 
-The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release. 
+The change log describes what is "Added", "Removed", "Changed" or "Fixed" between each release.
+
+## 1.2.0
+
+### Added
+
+- Support for PHP 8
+
+### Removed
+
+- Support for PHP < 7.2
 
 ## 1.1.0
 
-### Added 
+### Added
 
 - Bing Translator
 - Support for HTTPlug 2.0
